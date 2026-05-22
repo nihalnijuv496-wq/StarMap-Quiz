@@ -14,8 +14,11 @@ data class Constellation (
     val fact: String,
     val color: Color = Color.White
 )
+{
+    fun absoluteStarCoordinates(): List<Star> = stars.map{Star(center.x+it.x, center.y+it.y)}
+}
 
-val constellation = listOf(
+val constellations = listOf(
     Constellation(
         name = "Orion",
         center = Star(300f, 400f),
