@@ -1,10 +1,14 @@
 package org.nihal.orbitaltap
 
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 
 data class Star(
-    val x: Double, val y: Double
+    val x: Float, val y: Float
 )
+{
+    operator fun plus(other: Star):Star {return Star(other.x + x, other.y +y)}
+}
 
 data class Constellation (
     val name: String,
@@ -18,22 +22,24 @@ data class Constellation (
     fun absoluteStarCoordinates(): List<Star> = stars.map{Star(center.x+it.x, center.y+it.y)}
 }
 
+
+
 val constellations = listOf(
     Constellation(
         name = "Orion",
-        center = Star(300.0, 400.0),
+        center = Star(300.0f, 400.0f),
         stars = listOf(
-            Star(0.0, -50.0),
-            Star(40.5, -44.0),
-            Star(11.24, 2.5),
-            Star(20.0, 0.0),
-            Star(29.8, -5.57),
-            Star(4.78, 40.22),
-            Star(38.49, 35.02)
+            Star(0.0f, -50.0f),
+            Star(40.5f, -44.0f),
+            Star(11.24f, 2.5f),
+            Star(20.0f, 0.0f),
+            Star(29.8f, -5.57f),
+            Star(4.78f, 40.22f),
+            Star(38.49f, 35.02f)
         ),
         lines = listOf(
-            Pair(0,1),
-            Pair(0,2),
+            Pair(0, 1),
+            Pair(0, 2),
             Pair(1, 4),
             Pair(2, 3), Pair(4, 3),
             Pair(2, 5), Pair(4, 6),
@@ -43,14 +49,14 @@ val constellations = listOf(
     ),
     Constellation(
         name = "Taurus",
-        center = Star(200.0, 700.0),
+        center = Star(200.0f, 700.0f),
         stars = listOf(
-            Star(-20.0, -10.0),
-            Star(-5.0, -20.0),
-            Star(10.0, -25.0),
-            Star(-10.0, 5.0),
-            Star(5.0, 15.0),
-            Star(-30.0, 10.0),
+            Star(-20.0f, -10.0f),
+            Star(-5.0f, -20.0f),
+            Star(10.0f, -25.0f),
+            Star(-10.0f, 5.0f),
+            Star(5.0f, 15.0f),
+            Star(-30.0f, 10.0f),
         ),
         lines = listOf(
             Pair(0, 1), Pair(1, 2),
@@ -61,15 +67,15 @@ val constellations = listOf(
     ),
     Constellation(
         name = "Cygnus",
-        center = Star(1400.0, 500.0),
+        center = Star(1400.0f, 500.0f),
         stars = listOf(
-            Star(0.0, -40.0),
-            Star(0.0, -10.0),
-            Star(0.0, 20.0),
-            Star(0.0, 50.0),
-            Star(0.0, 80.0),
-            Star(-40.0, 20.0),
-            Star(40.0, 20.0),
+            Star(0.0f, -40.0f),
+            Star(0.0f, -10.0f),
+            Star(0.0f, 20.0f),
+            Star(0.0f, 50.0f),
+            Star(0.0f, 80.0f),
+            Star(-40.0f, 20.0f),
+            Star(40.0f, 20.0f),
         ),
         lines = listOf(
             Pair(0, 1), Pair(1, 2),
@@ -80,14 +86,14 @@ val constellations = listOf(
     ),
     Constellation(
         name = "Aquila",
-        center = Star(1200.0, 900.0),
+        center = Star(1200.0f, 900.0f),
         stars = listOf(
-            Star(0.0, -30.0),
-            Star(-15.0, -15.0),
-            Star(15.0, -15.0),
-            Star(0.0, 0.0),
-            Star(-5.0, 20.0),
-            Star(5.0, 4.0),
+            Star(0.0f, -30.0f),
+            Star(-15.0f, -15.0f),
+            Star(15.0f, -15.0f),
+            Star(0.0f, 0.0f),
+            Star(-5.0f, 20.0f),
+            Star(5.0f, 4.0f),
         ),
         lines = listOf(
             Pair(0, 1), Pair(0, 2),
@@ -98,37 +104,37 @@ val constellations = listOf(
     ),
     Constellation(
         name = "Cassiopeia",
-        center = Star(1200.0, 200.0),
+        center = Star(1200.0f, 200.0f),
         stars = listOf(
-            Star(-50.0, 20.0),
-            Star(-25.0, -10.0),
-            Star(0.0, 10.0),
-            Star(25.0, -15.0),
-            Star(50.0, 5.0),
+            Star(-50.0f, 20.0f),
+            Star(-25.0f, -10.0f),
+            Star(0.0f, 10.0f),
+            Star(25.0f, -15.0f),
+            Star(50.0f, 5.0f),
         ),
         lines = listOf(
-            Pair(0,1),
-            Pair(1,2),
-            Pair(2,3),
+            Pair(0, 1),
+            Pair(1, 2),
+            Pair(2, 3),
             Pair(3, 4),
         ),
         fact = "fact of Cassiopeia"
     ),
     Constellation(
         name = "Ursa Major",
-        center = Star(800.0, 300.0),
+        center = Star(800.0f, 300.0f),
         stars = listOf(
-            Star(-50.0, 20.0),
-            Star(-25.0, 10.0),
-            Star(-10.0, -10.0),
-            Star(10.0, -15.0),
-            Star(40.0, -30.0),
-            Star(60.0, -40.0),
-            Star(90.0, -50.0),
+            Star(-50.0f, 20.0f),
+            Star(-25.0f, 10.0f),
+            Star(-10.0f, -10.0f),
+            Star(10.0f, -15.0f),
+            Star(40.0f, -30.0f),
+            Star(60.0f, -40.0f),
+            Star(90.0f, -50.0f),
         ),
         lines = listOf(
             Pair(0, 1), Pair(1, 2),
-            Pair(0,3),
+            Pair(0, 3),
             Pair(2, 3), Pair(3, 4),
             Pair(4, 5), Pair(5, 6)
         ),
@@ -136,15 +142,15 @@ val constellations = listOf(
     ),
     Constellation(
         name = "Ursa Minor",
-        center = Star(1000.0, 500.0),
+        center = Star(1000.0f, 500.0f),
         stars = listOf(
-            Star(0.0, -40.0),
-            Star(10.0, -20.0),
-            Star(15.0, 0.0),
-            Star(5.0, 20.0),
-            Star(-10.0, 30.0),
-            Star(-25.0, 15.0),
-            Star(-20.0, -5.0),
+            Star(0.0f, -40.0f),
+            Star(10.0f, -20.0f),
+            Star(15.0f, 0.0f),
+            Star(5.0f, 20.0f),
+            Star(-10.0f, 30.0f),
+            Star(-25.0f, 15.0f),
+            Star(-20.0f, -5.0f),
         ),
         lines = listOf(
             Pair(0, 1), Pair(1, 2),
@@ -156,15 +162,15 @@ val constellations = listOf(
     ),
     Constellation(
         name = "Leo",
-        center = Star(400.0, 900.0),
+        center = Star(400.0f, 900.0f),
         stars = listOf(
-            Star(-40.0, -20.0),
-            Star(-25.0, -40.0),
-            Star(-5.0, -50.0),
-            Star(15.0, -40.0),
-            Star(25.0, -20.0),
-            Star(20.0, 10.0),
-            Star(0.0, 30.0),
+            Star(-40.0f, -20.0f),
+            Star(-25.0f, -40.0f),
+            Star(-5.0f, -50.0f),
+            Star(15.0f, -40.0f),
+            Star(25.0f, -20.0f),
+            Star(20.0f, 10.0f),
+            Star(0.0f, 30.0f),
         ),
         lines = listOf(
             Pair(0, 1), Pair(1, 2),
@@ -176,16 +182,16 @@ val constellations = listOf(
     ),
     Constellation(
         name = "Scorpius",
-        center = Star(1600.0, 1100.0),
+        center = Star(1600.0f, 1100.0f),
         stars = listOf(
-            Star(-20.0, -40.0),
-            Star(-10.0, -20.0),
-            Star(0.0, 0.0),
-            Star(10.0, 20.0),
-            Star(20.0, 40.0),
-            Star(15.0, 60.0),
-            Star(0.0, 70.0),
-            Star(-15.0, 65.0),
+            Star(-20.0f, -40.0f),
+            Star(-10.0f, -20.0f),
+            Star(0.0f, 0.0f),
+            Star(10.0f, 20.0f),
+            Star(20.0f, 40.0f),
+            Star(15.0f, 60.0f),
+            Star(0.0f, 70.0f),
+            Star(-15.0f, 65.0f),
         ),
         lines = listOf(
             Pair(0, 1), Pair(1, 2),
@@ -197,14 +203,14 @@ val constellations = listOf(
     ),
     Constellation(
         name = "Gemini",
-        center = Star(600.0, 600.0),
+        center = Star(600.0f, 600.0f),
         stars = listOf(
-            Star(-25.0, -30.0),
-            Star(20.0, -30.0),
-            Star(-28.0, -5.0),
-            Star(18.0, -5.0),
-            Star(-32.0, 20.0),
-            Star(14.0, 20.0),
+            Star(-25.0f, -30.0f),
+            Star(20.0f, -30.0f),
+            Star(-28.0f, -5.0f),
+            Star(18.0f, -5.0f),
+            Star(-32.0f, 20.0f),
+            Star(14.0f, 20.0f),
         ),
         lines = listOf(
             Pair(0, 2), Pair(2, 4),
@@ -214,3 +220,5 @@ val constellations = listOf(
         fact = "fact of Gemini"
     ),
 )
+
+

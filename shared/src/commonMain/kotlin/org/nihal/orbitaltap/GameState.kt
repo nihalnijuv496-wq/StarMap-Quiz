@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.text.style.LineHeightStyle
 import kotlin.math.*
 
 class GameState {
@@ -22,6 +23,13 @@ class GameState {
         private set
     var mapOffset by mutableStateOf(Offset(0f, 0f))
         private set
+
+    var canvasSize: Offset = Offset.Zero
+
+    fun updateCanvasSize(width: Float, height: Float)
+    {
+        canvasSize = Offset(width, height)
+    }
 
 
 
@@ -74,9 +82,20 @@ class GameState {
         mapOffset = Offset(0f,0f)
     }
 
-    fun onDrag(delta: Offset)
+    fun onDrag(delta: Offset, canvasSize: Pair<Int, Int>)
     {
-        mapOffset += delta
+        mapOffset -= delta
+        println(mapOffset)
+
+        if (mapOffset.x < 0)
+            mapOffset = Offset(0.0f, mapOffset.y)
+        if (mapOffset.y < 0)
+            mapOffset = Offset(mapOffset.x, 0.0f)
+        if (mapOffset.x > 2000 - canvasSize.first)
+            mapOffset = Offset((2000 - canvasSize.first).toFloat(), mapOffset.y)
+        if (mapOffset.y > 2000 - canvasSize.second)
+            mapOffset = Offset(mapOffset.x, (2000 - canvasSize.second).toFloat())
+
     }
 }
 

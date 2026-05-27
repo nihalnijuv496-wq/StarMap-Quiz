@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,7 +37,8 @@ fun GameScreen(gameState: GameState, onGameOver: () -> Unit, onExit: () -> Unit)
     Column (
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(3, 10, 22)),
+            .background(color = Color(3, 10, 22))
+            .padding(20.dp, 10.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     )
@@ -49,7 +51,7 @@ fun GameScreen(gameState: GameState, onGameOver: () -> Unit, onExit: () -> Unit)
             color = Color.White
         )
 
-        //TODO("render the map")
+        StarMapRenderer(gameState)
 
         Row (
             modifier = Modifier
