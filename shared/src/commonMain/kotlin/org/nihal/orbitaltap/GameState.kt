@@ -4,7 +4,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.text.style.LineHeightStyle
 import kotlin.math.*
 
 class GameState {
@@ -12,8 +11,8 @@ class GameState {
 
     var currAnswer by mutableStateOf<Constellation?>(null)
         private set
-    val currQuestion get() =    if(currAnswer!= null) "Find:${questionAnswerPairs.find { it.second == currAnswer?.name }}"
-                                else ""
+    val currQuestion get() =    if(currAnswer!= null) "Find:${(questionAnswerPairs.find { it.second == currAnswer?.name })?.first}"
+                                else "answer null"
 
     var score by mutableStateOf(0)
         private set
@@ -44,13 +43,13 @@ class GameState {
         currAnswer = constellations.random()
     }
 
-    fun checkClick(clickedX: Double, clickedY: Double): Boolean
+    fun checkClick(clickedX: Float, clickedY: Float): Boolean
     {
         if(currAnswer == null) return false;
 
         val distanceFromTarget = sqrt(
-            (clickedX - (currAnswer!!.center.x + mapOffset.x)) * (clickedX - (currAnswer!!.center.x + mapOffset.x)) +
-                    (clickedY - (currAnswer!!.center.y + mapOffset.y)) *  (clickedY - (currAnswer!!.center.y + mapOffset.y))
+            (clickedX - (currAnswer!!.center.x - mapOffset.x)) * (clickedX - (currAnswer!!.center.x - mapOffset.x)) +
+                    (clickedY - (currAnswer!!.center.y - mapOffset.y)) *  (clickedY - (currAnswer!!.center.y - mapOffset.y))
         )
         if(distanceFromTarget <= 60)
         {
@@ -100,5 +99,14 @@ class GameState {
 }
 
 val questionAnswerPairs = listOf(
-    Pair("Polaris is in?", "Ursa Minor")
+    Pair("Gemini", "Gemini"),
+    Pair("Orion", "Orion"),
+    Pair("Taurus", "Taurus"),
+    Pair("Cygnus", "Cygnus"),
+    Pair("Aquila", "Aquila"),
+    Pair("Cassiopeia", "Cassiopeia"),
+    Pair("Ursa Major", "Ursa Major"),
+    Pair("Ursa Minor", "Ursa Minor"),
+    Pair("Leo", "Leo"),
+    Pair("Scorpius", "Scorpius")
 )

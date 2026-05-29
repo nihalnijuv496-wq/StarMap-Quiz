@@ -15,7 +15,9 @@ fun App()
         when(screen)
         {
             "menu" -> MenuScreen(
-                onStartGame = {screen = "game"},
+                onStartGame = {
+                    screen = "game"
+                    gameState.startGame() },
                 onExit = {
                     gameState.resetAll()
                 }
@@ -31,6 +33,7 @@ fun App()
             "gameover" -> GameOverScreen(
                 gameState = gameState,
                 onRestart = {
+                    gameState.resetAll()
                     gameState.startGame()
                     screen = "game"
                 },

@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.remember
@@ -25,7 +26,7 @@ data class BackgroundStar(
     val radius: Float
 )
 @Composable
-fun StarMapRenderer(gameState: GameState)
+fun StarMapRenderer(gameState: GameState, onGameOver: () -> Unit)
 {
     val backgroundStars = remember {
         List(1000)
@@ -79,6 +80,14 @@ fun StarMapRenderer(gameState: GameState)
                     detectDragGestures(
                         onDrag =  {_, dragAmount ->
                             gameState.onDrag(dragAmount, Pair(size.width, size.height))
+                        }
+                    )
+                }
+                .pointerInput(Unit){
+                    detectTapGestures (
+                        onTap = {offset ->
+                            gameState.checkClick(offset.x, offset.y)
+                            if(gameState.isGameOver) onGameOver()
                         }
                     )
                 }

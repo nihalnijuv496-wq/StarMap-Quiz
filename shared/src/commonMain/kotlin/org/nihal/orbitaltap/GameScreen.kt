@@ -51,7 +51,7 @@ fun GameScreen(gameState: GameState, onGameOver: () -> Unit, onExit: () -> Unit)
             color = Color.White
         )
 
-        StarMapRenderer(gameState)
+        StarMapRenderer(gameState, onGameOver)
 
         Row (
             modifier = Modifier
@@ -77,12 +77,20 @@ fun GameScreen(gameState: GameState, onGameOver: () -> Unit, onExit: () -> Unit)
                 fontWeight = FontWeight.Light,
                 color = Color.White
             )
+            Text(
+                text = "Lives: \n${gameState.lives}",  //temporarily showing score instead of a timer
+                textAlign = TextAlign.Center,
+                fontFamily = ComfortaaFamily,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Light,
+                color = Color.White
+            )
         }
 
         Spacer(Modifier.height(10.dp))
 
         Text(
-            text = "get Question here", // placeholding the question
+            text = gameState.currQuestion,
             fontFamily = ComfortaaFamily,
             fontSize = 24.sp,
             fontWeight = FontWeight.Light,
