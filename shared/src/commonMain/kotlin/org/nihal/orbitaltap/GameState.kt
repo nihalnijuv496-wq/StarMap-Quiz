@@ -4,19 +4,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
+import org.nihal.orbitaltap.Utils.Timer.Timer
 import kotlin.math.*
 
 class GameState {
 
 
+    val timer = Timer(15000.0)
     var currAnswer by mutableStateOf<Constellation?>(null)
         private set
     val currQuestion get() =    if(currAnswer!= null) "Find:${(questionAnswerPairs.find { it.second == currAnswer?.name })?.first}"
                                 else "answer null"
 
     var score by mutableStateOf(0)
-        private set
-    var lives by mutableStateOf(3)
         private set
     var isGameOver by mutableStateOf(false)
         private set
@@ -54,29 +54,26 @@ class GameState {
         if(distanceFromTarget <= 60)
         {
             ++score
+            addToTime(5000.0)
             getNewQuestion()
             return true
         }
-        loseLife()
+        addToTime(-3000.0)
         return false
     }
 
-    fun onTimeUp() {
-        loseLife()
-        if(!isGameOver) getNewQuestion()
+    fun addToTime(timeMillis: Double)
+    {
+        timer.resetTimer(timer.elapsedTimeMillis - timeMillis)
+        println(timer.remainingTimeSeconds.toLong())
+        println(timer.remainingTimeSeconds.toLong() + timeMillis)
     }
 
-    fun loseLife()
-    {
-        --lives
-        if(lives == 0) isGameOver = true
-    }
 
     fun resetAll()
     {
         currAnswer = null
         score = 0
-        lives = 3
         isGameOver = false
         mapOffset = Offset(0f,0f)
     }

@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -75,19 +74,11 @@ fun GameScreen(gameState: GameState, onGameOver: () -> Unit, onExit: () -> Unit)
 
 
             //TODO("implement the timer circle")
-            val timer = remember { Timer(30000L) }
-            StartTimer(timer)
+
+            StartTimer(gameState.timer, onGameOver)
 
             Text(
-                text = "Time: \n${timer.remainingTimeSeconds.toInt()}",  //temporarily showing score instead of a timer
-                textAlign = TextAlign.Center,
-                fontFamily = ComfortaaFamily,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Light,
-                color = Color.White
-            )
-            Text(
-                text = "Lives: \n${gameState.lives}",  //temporarily showing score instead of a timer
+                text = "Time: \n${gameState.timer.remainingTimeSeconds.toInt()}",
                 textAlign = TextAlign.Center,
                 fontFamily = ComfortaaFamily,
                 fontSize = 20.sp,
